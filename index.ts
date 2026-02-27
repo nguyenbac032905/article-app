@@ -1,11 +1,17 @@
 import express,{Express, Response, Request} from "express";
+import * as database from "./config/database";
+import dotenv  from "dotenv";
+import Article from "./models/article.model";
+dotenv.config();
+database.connect();
 
 const app: Express = express();
-const port: number = 3000;
+const port: number | string = process.env.PORT;
 
-app.get("/article", (req: Request, res: Response) => {
+app.get("/article", async (req: Request, res: Response) => {
+    const articles = await Article.find({deleted: false});
     res.json({
-        articles: []
+        articles: articles
     })
 })
 
