@@ -20,8 +20,14 @@ export const resolvers = {
             const {article} = args;
             const record = new Article(article);
             await record.save();
-            
+
             return record;
+        },
+        deleteArticle: async (_, args) => {
+            const {id} = args;
+            await Article.updateOne({_id: id},{$set: {deleted: false}});
+
+            return "Da xoa"
         }
     }
 };
