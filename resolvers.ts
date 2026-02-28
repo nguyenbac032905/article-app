@@ -8,6 +8,11 @@ export const resolvers = {
         getListArticle: async () => {
             const article = await Article.find({deleted: false});
             return article;
+        },
+        getArticle: async (_,args) => {
+            const {idArticle} = args;
+            const article = await Article.findOne({deleted: false, _id: idArticle});
+            return article
         }
     }
 };

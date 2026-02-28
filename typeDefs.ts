@@ -9,6 +9,7 @@ export const typeDefs = gql`
     }
     type Query{
         hello: String,
-        getListArticle: [Article]
+        getListArticle: [Article],
+        getArticle(idArticle: ID): Article
     }
 `;
