@@ -5,13 +5,24 @@ export const typeDefs = gql`
         id: ID,
         title: String,
         avatar: String,
+        description: String,
+        categoryId: String,
+        category: Category
+    }
+
+    type Category{
+        id: ID,
+        title: String,
+        avatar: String,
         description: String
     }
 
     type Query{
         hello: String,
         getListArticle: [Article],
-        getArticle(idArticle: ID): Article
+        getArticle(idArticle: ID): Article,
+        getListCategory: [Category],
+        getCategory(id: ID): Category,
     }
 
     input ArticleInput {
@@ -22,9 +33,20 @@ export const typeDefs = gql`
         categoryId: String
     }
 
+    input CategoryInput {
+        title: String,
+        avatar: String,
+        description: String,
+        deleted: Boolean,
+    }
+
     type Mutation{
         createArticle(article: ArticleInput): Article,
         deleteArticle(id: ID): String,
-        updateArticle(id: ID, article: ArticleInput): Article
+        updateArticle(id: ID, article: ArticleInput): Article,
+
+        createCategory(category: CategoryInput): Category,
+        deleteCategory(id: ID): String,
+        updateCategory(id: ID, category: CategoryInput): Category
     }
 `;
