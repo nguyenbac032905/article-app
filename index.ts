@@ -3,7 +3,7 @@ import * as database from "./config/database";
 import dotenv  from "dotenv";
 import { ApolloServer, gql } from "apollo-server-express";
 import {ApolloServerPluginLandingPageLocalDefault,} from "apollo-server-core";
-import { typeDefs } from "./typeDefs";
+import { typeDefs } from "./typedefs/index.typeDefs";
 import { resolvers } from "./resolvers";
 
 const startServer = async () => {
@@ -16,7 +16,7 @@ const startServer = async () => {
     //GraphQL
     
     const apolloServer = new ApolloServer({
-        typeDefs,
+        typeDefs: typeDefs,
         resolvers,
         plugins: [
             ApolloServerPluginLandingPageLocalDefault({ embed: true }),
