@@ -4,7 +4,7 @@ import dotenv  from "dotenv";
 import { ApolloServer, gql } from "apollo-server-express";
 import {ApolloServerPluginLandingPageLocalDefault,} from "apollo-server-core";
 import { typeDefs } from "./typedefs/index.typeDefs";
-import { resolvers } from "./resolvers";
+import { resolvers } from "./resolvers/index.resolvers";
 
 const startServer = async () => {
     dotenv.config();
@@ -17,7 +17,7 @@ const startServer = async () => {
     
     const apolloServer = new ApolloServer({
         typeDefs: typeDefs,
-        resolvers,
+        resolvers: resolvers,
         plugins: [
             ApolloServerPluginLandingPageLocalDefault({ embed: true }),
         ],
