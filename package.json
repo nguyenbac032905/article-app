@@ -5,7 +5,8 @@
     "express": "^4.22.1",
     "graphql": "^16.13.0",
     "md5": "^2.3.0",
-    "mongoose": "^9.2.3"
+    "mongoose": "^9.2.3",
+    "pre-commit": "^1.2.2"
   },
   "name": "article-app-graphql",
   "version": "1.0.0",
@@ -19,8 +20,16 @@
   },
   "scripts": {
     "start": "nodemon index.ts",
+    "build": "tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "author": "",
   "license": "ISC",
   "description": ""

@@ -4,9 +4,25 @@ import md5 from "md5";
 
 export const resolversUser = {
     Query: {
-        getListUser: async () => {
-            const users = await User.find({deleted: false});
-            return users;
+        getUser: async (_,args, context) => {
+            if(context["user"].token) {
+                const user = await User.findOne({token: context["user"].token,deleted: false});
+            
+                if(user){
+                    return {
+                        code: 200,
+                        message: "Thanh cong",
+                        id: user.id,
+                        fullName: user.fullName,
+                        email: user.email,
+                        token: user.token
+                    }
+                }
+            }
+            return {
+                code: 400,
+                message: "That bai"
+            }
         }
     },
     Mutation: {
